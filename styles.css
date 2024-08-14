@@ -56,6 +56,7 @@ nav ul {
 nav .main-nav {
     justify-content: center;
     display: flex;
+    gap: 30px; 
 }
 
 nav .document-links {
@@ -65,7 +66,7 @@ nav .document-links {
 }
 
 nav ul li {
-    margin: 0 10px 10px 10px;
+    margin: 0; 
 }
 
 nav ul li a {
@@ -76,6 +77,7 @@ nav ul li a {
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
     text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    white-space: nowrap;
 }
 
 nav ul li a:hover {
@@ -109,27 +111,23 @@ nav .document-links li:nth-child(2) a:hover { color: #FFB7B2; }
 nav .document-links li a::after {
     content: attr(title);
     position: absolute;
-    bottom: -25px;
+    bottom: -20px;  
     left: 50%;
     transform: translateX(-50%);
     background: linear-gradient(45deg, rgba(255,154,162,0.9), rgba(255,183,178,0.9));
     color: #000;
-    padding: 4px 8px;
-    border-radius: 3px;
-    font-size: 0.7em;
+    padding: 1px 4px; 
+    border-radius: 0.8px;  
+    font-size: 0.4em;  
     white-space: nowrap;
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);  
 }
 
 nav .document-links li a:hover::after {
     opacity: 1;
-}
-
-main {
-    padding-top: 70px;
 }
 
 main {
@@ -171,76 +169,89 @@ section {
     text-align: center;
 }
 
-/* Common styles for all cards */
-.card, .project-card, .contact-card {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.card::before, .project-card::before, .contact-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(
-        45deg,
-        transparent,
-        rgba(255, 255, 255, 0.1),
-        transparent
-    );
-    transform: rotate(45deg);
-    transition: all 0.5s ease;
-}
-
-.card:hover::before, .project-card:hover::before, .contact-card:hover::before {
-    left: 100%;
-    top: 100%;
-}
-
-.card:hover, .project-card:hover, .contact-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
-}
-
-/* About Me Cards */
 .card-container {
-    display: flex;
-    overflow-x: auto;
-    padding: 20px 0;
-    scroll-snap-type: x mandatory;
-    width: 100%;
+    position: relative;
+    width: 90%;
     max-width: 1200px;
+    height: 600px;
     margin: 0 auto;
-    justify-content: center;
-    gap: 50px;
-    align-items: flex-start; 
+    perspective: 1000px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-right: 20px; 
+}
+
+/* Custom Scrollbar Styles */
+.card-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.card-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-right: 10px; 
+}
+
+.card-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #FF9AA2, #FFB7B2, #FFDAC1);
+    border-radius: 5px;
+    border: 2px solid rgba(0, 0, 0, 0.3); /* Add a border for better visibility */
+}
+
+.card-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #FFB7B2, #FFDAC1, #E2F0CB);
 }
 
 .card {
-    flex: 0 0 auto;
-    width: 300px;
-    scroll-snap-align: center;
-    display: flex;
-    flex-direction: column;
+    position: absolute;
+    width: calc(100% - 20px); /* Subtract the padding-right value */
+    height: auto;
+    min-height: 100%;
+    transition: transform 0.8s, opacity 0.8s;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    border-radius: 20px;
+    padding: 30px;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+}
+
+/* Different gradients for each card */
+.card:nth-child(1) {
+    background: linear-gradient(135deg, rgba(255, 154, 162, 0.1), rgba(255, 183, 178, 0.1));
+}
+
+.card:nth-child(2) {
+    background: linear-gradient(135deg, rgba(255, 218, 193, 0.1), rgba(226, 240, 203, 0.1));
+}
+
+.card:nth-child(3) {
+    background: linear-gradient(135deg, rgba(181, 234, 215, 0.1), rgba(199, 206, 234, 0.1));
+}
+
+.card.active {
+    opacity: 1;
+    transform: translateX(0) rotateY(0);
+    pointer-events: auto;
 }
 
 .card h3 {
-    background: linear-gradient(45deg, #FF9AA2, #FFB7B2);
+    font-size: 2em;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #FF9AA2, #FFB7B2, #FFDAC1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
-    margin-bottom: 10px;
 }
 
-.card h4 {
-    background: linear-gradient(45deg, #FFDAC1, #E2F0CB);
+.card h4, .card h5 {
+    background: linear-gradient(45deg, #FFDAC1, #E2F0CB, #B5EAD7);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -249,7 +260,28 @@ section {
     margin-bottom: 5px;
 }
 
-/* Project Cards */
+.card-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card-controls button {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.card-controls button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -257,25 +289,50 @@ section {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    align-items: start; 
+    align-items: start;
+}
+
+.project-card {
+    background: linear-gradient(135deg, rgba(255, 218, 193, 0.1), rgba(226, 240, 203, 0.1));
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, rgba(255, 218, 193, 0.2), rgba(226, 240, 203, 0.2));
 }
 
 .project-card h3 {
-    color: #FFB7B2;
+    background: linear-gradient(45deg, #FFB7B2, #FFDAC1, #E2F0CB);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
     margin-bottom: 10px;
+    font-size: 1.5em;
 }
 
 .project-card h4 {
-    color: #FFDAC1;
+    background: linear-gradient(45deg, #FFDAC1, #E2F0CB, #B5EAD7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
     margin-top: 15px;
     margin-bottom: 5px;
+    font-size: 1.2em;
 }
 
 .project-card ul {
     padding-left: 20px;
 }
 
-/* Contact Cards */
 .contact-container {
     display: flex;
     justify-content: center;
@@ -289,12 +346,22 @@ section {
 .contact-card {
     width: 200px;
     text-align: center;
+    background: linear-gradient(135deg, rgba(181, 234, 215, 0.1), rgba(199, 206, 234, 0.1));
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, rgba(181, 234, 215, 0.2), rgba(199, 206, 234, 0.2));
 }
 
 .contact-card i {
     font-size: 3em;
     margin-bottom: 15px;
-    background: linear-gradient(45deg, #FF9AA2, #FFB7B2, #FFDAC1, #E2F0CB);
+    background: linear-gradient(45deg, #FF9AA2, #FFB7B2, #FFDAC1, #E2F0CB, #B5EAD7, #C7CEEA);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -316,41 +383,6 @@ section {
 
 .contact-card:hover a {
     color: #FFDAC1;
-}
-
-.phone:hover { background: linear-gradient(135deg, rgba(255, 154, 162, 0.2), rgba(255, 183, 178, 0.2)); }
-.email:hover { background: linear-gradient(135deg, rgba(255, 218, 193, 0.2), rgba(226, 240, 203, 0.2)); }
-.linkedin:hover { background: linear-gradient(135deg, rgba(181, 234, 215, 0.2), rgba(199, 206, 234, 0.2)); }
-
-/* Scrollbar styles */
-.card-container::-webkit-scrollbar {
-    height: 8px;
-}
-
-.card-container::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-}
-
-.card-container::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 4px;
-}
-
-footer {
-    text-align: center;
-    padding: 2rem;
-    background-color: transparent;
-}
-
-.cursor {
-    animation: blink 0.7s infinite;
-}
-
-@keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
 }
 
 .floating-languages {
@@ -394,6 +426,22 @@ footer {
 .floating-languages i:nth-child(11) { top: 85%; left: 70%; animation-delay: -20s; }
 .floating-languages i:nth-child(12) { top: 35%; left: 85%; animation-delay: -22s; }
 
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: transparent;
+}
+
+.cursor {
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 @media (max-width: 768px) {
     #typing-name {
         font-size: 3em;
@@ -407,10 +455,17 @@ footer {
         font-size: 2.5em;
     }
 
-    .card-container, .project-grid {
-        justify-content: flex-start;
-        padding: 20px;
-        gap: 30px;
+    .card-container {
+        width: 95%;
+        height: auto;
+    }
+
+    .card {
+        position: relative;
+        height: auto;
+        opacity: 1;
+        pointer-events: auto;
+        margin-bottom: 20px;
     }
 
     .project-grid {
@@ -420,5 +475,28 @@ footer {
     .contact-card {
         width: 80%;
         max-width: 300px;
+    }
+
+    nav .main-nav {
+        gap: 15px;
+    }
+
+    nav ul li a {
+        font-size: 1em;
+        padding: 8px 12px;
+    }
+
+    nav .document-links {
+        position: static;
+        margin-top: 10px;
+    }
+
+    .card-controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card-controls button {
+        margin: 10px 0;
     }
 }

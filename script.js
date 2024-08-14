@@ -62,7 +62,7 @@ function typeWord(element, words, callback) {
 
 function typeSectionTitle(element, text, color) {
     let i = 0;
-    element.innerHTML = ''; // Clear any existing content
+    element.innerHTML = '';
     function typeChar() {
         if (i < text.length) {
             element.innerHTML += `<span style="color:${color}">${text[i]}</span>`;
@@ -84,15 +84,44 @@ function setupIntersectionObserver() {
                 const titleText = titleElement.getAttribute('data-text');
                 const titleColor = sectionTitles.find(t => t.text === titleText).color;
                 typeSectionTitle(titleElement, titleText, titleColor);
-                observer.unobserve(titleElement); // Stop observing once typed
+                observer.unobserve(titleElement);
             }
         });
-    }, { threshold: 0.5 }); // Trigger when 50% of the title is visible
+    }, { threshold: 0.5 });
 
     titles.forEach((title) => {
         observer.observe(title);
     });
 }
+
+// Add card shuffling functionality
+const cards = document.querySelectorAll('.card');
+const prevBtn = document.getElementById('prevCard');
+const nextBtn = document.getElementById('nextCard');
+let currentCardIndex = 0;
+
+function showCard(index) {
+    cards.forEach((card, i) => {
+        if (i === index) {
+            card.classList.add('active');
+        } else {
+            card.classList.remove('active');
+        }
+    });
+}
+
+function nextCard() {
+    currentCardIndex = (currentCardIndex + 1) % cards.length;
+    showCard(currentCardIndex);
+}
+
+function prevCard() {
+    currentCardIndex = (currentCardIndex - 1 + cards.length) % cards.length;
+    showCard(currentCardIndex);
+}
+
+nextBtn.addEventListener('click', nextCard);
+prevBtn.addEventListener('click', prevCard);
 
 window.onload = function() {
     typeNextChar();
@@ -105,4 +134,7 @@ window.onload = function() {
         const randomColor = colors[Math.floor(Math.random() * colors.length)];
         icon.style.color = randomColor;
     });
+
+    // Initialize the first card
+    showCard(currentCardIndex);
 };

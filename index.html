@@ -12,21 +12,18 @@
     <div class="background-wave"></div>
     <header>
         <nav>
-            <div class="nav-placeholder"></div>
             <ul class="main-nav">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
-                
-                <ul class="document-links">
+            </ul>
+            <ul class="document-links">
                 <li><a href="assets/2024-25 Resume.pdf" download title="Download Resume">📄</a></li>
                 <li><a href="assets/Fazli Berisha 2024-25 CV.pdf" download title="Download CV">✉️</a></li>
             </ul>
         </nav>
     </header>
-
-
 
     <main>
         <section id="home" class="hero">
@@ -54,7 +51,7 @@
         <section id="about">
             <h2 class="section-title" data-text="About Me"></h2>
             <div class="card-container">
-                <div class="card">
+                <div class="card active" id="card1">
                     <h3>Education</h3>
                     <h4>Coastal Carolina University</h4>
                     <p>Bachelor of Information Systems | GPA: 3.0</p>
@@ -73,14 +70,14 @@
                     <h5>Awards/Honors:</h5>
                     <p>Dean's List of 2022</p>
                 </div>
-                <div class="card">
+                <div class="card" id="card2">
                     <h3>Technical Skills</h3>
                     <h4>Languages:</h4>
                     <p>Python, C/C++, HTML/CSS, PHP, JavaScript, SQL</p>
                     <h4>Tools:</h4>
                     <p>React, Flask, .NET, phpMyAdmin, Postman, Linux, Windows, VsCode, JetBrains, Matplotlib, TinyMCE</p>
                 </div>
-                <div class="card">
+                <div class="card" id="card3">
                     <h3>Experience</h3>
                     <h4>Teacher Assistant</h4>
                     <p>Coastal Carolina University, Conway, SC</p>
@@ -97,6 +94,10 @@
                         <li>Recognized for producing high-quality code through the implementation of best practices and rigorous testing, resulting in significantly fewer bugs and improved project efficiency.</li>
                     </ul>
                 </div>
+            </div>
+            <div class="card-controls">
+                <button id="prevCard">Previous</button>
+                <button id="nextCard">Next</button>
             </div>
         </section>
 
