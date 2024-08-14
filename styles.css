@@ -162,12 +162,15 @@ section {
     margin: 0 auto;
     justify-content: center;
     gap: 50px;
+    align-items: flex-start; 
 }
 
 .card {
     flex: 0 0 auto;
     width: 300px;
     scroll-snap-align: center;
+    display: flex;
+    flex-direction: column;
 }
 
 .card h3 {
@@ -197,6 +200,7 @@ section {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    align-items: start; 
 }
 
 .project-card h3 {
