@@ -22,15 +22,9 @@ body {
 }
 
 @keyframes gradientFlow {
-    0% {
-        background-position: 0% 50%, center;
-    }
-    50% {
-        background-position: 100% 50%, center;
-    }
-    100% {
-        background-position: 0% 50%, center;
-    }
+    0% { background-position: 0% 50%, center; }
+    50% { background-position: 100% 50%, center; }
+    100% { background-position: 0% 50%, center; }
 }
 
 header {
@@ -40,8 +34,15 @@ header {
     left: 0;
     right: 0;
     z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(10px);
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 
 nav ul {
@@ -49,8 +50,18 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
+}
+
+nav .main-nav {
+    justify-content: center;
+    display: flex;
+}
+
+nav .document-links {
+    position: absolute;
+    right: 0;
+    display: flex;
 }
 
 nav ul li {
@@ -64,16 +75,62 @@ nav ul li a {
     padding: 10px 15px;
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 nav ul li a:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-nav ul li:nth-child(1) a:hover { color: #FF9AA2; }
-nav ul li:nth-child(2) a:hover { color: #FFB7B2; }
-nav ul li:nth-child(3) a:hover { color: #FFDAC1; }
-nav ul li:nth-child(4) a:hover { color: #E2F0CB; }
+nav .main-nav li:nth-child(1) a:hover { color: #FF9AA2; }
+nav .main-nav li:nth-child(2) a:hover { color: #FFB7B2; }
+nav .main-nav li:nth-child(3) a:hover { color: #FFDAC1; }
+nav .main-nav li:nth-child(4) a:hover { color: #E2F0CB; }
+
+nav .document-links li a {
+    font-size: 1.3em;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease;
+    position: relative;
+}
+
+nav .document-links li a:hover {
+    transform: scale(1.1);
+}
+
+nav .document-links li:nth-child(1) a:hover { color: #FF9AA2; }
+nav .document-links li:nth-child(2) a:hover { color: #FFB7B2; }
+
+nav .document-links li a::after {
+    content: attr(title);
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(45deg, rgba(255,154,162,0.9), rgba(255,183,178,0.9));
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 0.7em;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+nav .document-links li a:hover::after {
+    opacity: 1;
+}
+
+main {
+    padding-top: 70px;
+}
 
 main {
     padding-top: 70px;
