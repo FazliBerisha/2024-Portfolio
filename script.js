@@ -7,6 +7,7 @@ const name = [
 ];
 
 const title = [
+    { text: 'Junior', color: '#FFDAC1' },
     { text: 'Software', color: '#FFDAC1' },
     { text: '{Developer}', color: '#E2F0CB' },
     { text: '&', color: '#B5EAD7' },
