@@ -140,10 +140,31 @@ window.onload = function() {
     showCard(currentCardIndex);
 };
 
-document.querySelectorAll('.project-card').forEach(card => {
-    const btn = card.querySelector('.expand-btn');
-    btn.addEventListener('click', () => {
-        card.classList.toggle('expanded');
-        btn.textContent = card.classList.contains('expanded') ? 'Read Less' : 'Read More';
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.project-card').forEach(card => {
+        const btn = card.querySelector('.expand-btn');
+        const details = card.querySelector('.project-details');
+        
+        btn.addEventListener('click', () => {
+            // Close all other cards
+            document.querySelectorAll('.project-card').forEach(otherCard => {
+                if (otherCard !== card && otherCard.classList.contains('expanded')) {
+                    otherCard.classList.remove('expanded');
+                    otherCard.querySelector('.expand-btn').textContent = 'Read More';
+                    otherCard.querySelector('.project-details').style.maxHeight = "0";
+                }
+            });
+
+            // Toggle the clicked card
+            card.classList.toggle('expanded');
+            if (card.classList.contains('expanded')) {
+                btn.textContent = 'Read Less';
+                details.style.maxHeight = details.scrollHeight + "px";
+                card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            } else {
+                btn.textContent = 'Read More';
+                details.style.maxHeight = "0";
+            }
+        });
     });
 });
