@@ -139,3 +139,11 @@ window.onload = function() {
     // Initialize the first card
     showCard(currentCardIndex);
 };
+
+document.querySelectorAll('.project-card').forEach(card => {
+    const btn = card.querySelector('.expand-btn');
+    btn.addEventListener('click', () => {
+        card.classList.toggle('expanded');
+        btn.textContent = card.classList.contains('expanded') ? 'Read Less' : 'Read More';
+    });
+});

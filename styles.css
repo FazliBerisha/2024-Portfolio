@@ -282,17 +282,25 @@ section {
     transform: translateY(-2px);
 }
 
+#projects {
+    overflow-x: auto;
+    padding-bottom: 20px; /* Add some padding to show scrollbar */
+}
+
 .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 50px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    align-items: start;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    padding: 20px 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
 }
 
 .project-card {
+    flex: 0 0 auto;
+    width: 300px; /* Fixed width for uniformity */
+    scroll-snap-align: start;
     background: linear-gradient(135deg, rgba(255, 218, 193, 0.1), rgba(226, 240, 203, 0.1));
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -300,12 +308,76 @@ section {
     transition: all 0.3s ease;
     border-radius: 10px;
     padding: 20px;
+    overflow: hidden;
 }
 
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
     background: linear-gradient(135deg, rgba(255, 218, 193, 0.2), rgba(226, 240, 203, 0.2));
+}
+
+.project-summary h3 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.project-date, .project-tech {
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.expand-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.expand-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.project-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.project-card.expanded .project-details {
+    max-height: 500px; /* Adjust as needed */
+    transition: max-height 0.5s ease-in;
+}
+
+.project-details ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+/* Custom scrollbar for Webkit browsers */
+.project-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.project-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.project-grid::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #FF9AA2, #FFB7B2, #FFDAC1);
+    border-radius: 4px;
+}
+
+.project-grid::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #FFB7B2, #FFDAC1, #E2F0CB);
 }
 
 .project-card h3 {
