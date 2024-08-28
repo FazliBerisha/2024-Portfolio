@@ -34,6 +34,3 @@ This portfolio site is designed to showcase your projects, skills, and experienc
 
 ## Contributing
 This is a personal portfolio project and is not open for external contributions. However, if you have suggestions or find any issues, please feel free to open an issue in the repository.
-
-## License
-This project is open source and available under the [MIT License](LICENSE).
